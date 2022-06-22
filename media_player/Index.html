@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>PlatziMediaPlayer.js</title>
+    <title>MEDIA PLAYER</title>
     <link
       rel="stylesheet"
       href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
@@ -10,40 +10,16 @@
 
   <body>
     <header>
-      <h1>PlatziMediaPlayer.js</h1>
+      <h1>PROYECTO MEDIAPLAYER PROFESIONAL JS</h1>
       <p>An extensible media player.</p>
     </header>
-
     <main class="container">
-      <video class="movie">
-        <source src="./assets/BigBuckBunny.mp4" />
+      <video id = "video" class="movie">
+        <source src="./assets/BigBuckBunny.mp4" id = "video" />
       </video>
-      <button>Play/Pause</button>
-   </main>
-   <script>
-    
-    const video = document.querySelector ("video")
-    const button = document.querySelector ("button")
-    const player = new MediaPlayer ({el: video});
-
-     function MediaPlayer (config) {
-        this.media = config.el}    
-
-        MediaPlayer.prototype.play = function () {
-            this.media.play()}
-
-        MediaPlayer.prototype.pause = function () {
-            this.media.pause()}
-
-            MediaPlayer.prototype.togglePlay = function() {
-             if (this.media.paused) {
-                 this.play();
-                 console.log(this.media.paused)
-                } else {
-                this.pause();
-        }
-      };
-       button.onclick = () => player.togglePlay () // funcion fecha es de scmas6, simplifica el uso de funciones. es decir "buttion.onclick" es el evento de click que dispara la funcion definida por la flecha   
-    </script>
+      <button id = "playPause">Play/Pause</button>
+      <button id = "unmuteMute">Mute/Desmute</button>
+       </main>
+   <script type="module" src="./index.js" > </script>
   </body>
 </html>

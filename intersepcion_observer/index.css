@@ -1,0 +1,37 @@
+body {
+    background-color: #827C7B;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    overflow: auto;
+}
+
+.box{
+    background-color: #8704a1c2;
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 100vh;
+    padding: 1.5rem 0;
+    position: relative;
+}
+
+.box::after {
+    content: "50%";
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 100%;
+    background-color: rgb(1, 82, 255);
+    height: 50%;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+

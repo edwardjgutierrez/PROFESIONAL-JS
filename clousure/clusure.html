@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLOUSURE</title>
+</head>
+<body>
+    <script>
+//este es un CLUSURE basico, donde retornamos una f() dentro de otra
+        function crearContador (){
+            let contador =0
+            return function incrementar (){ //invoco RETURN con el fin de darle el valor a la f() GLOBAL con lo que resulte de la f() LOCAL
+                contador = contador + 1
+                return contador
+            }
+        } 
+        const contar = crearContador() //aca lo convierto en un CLAUSURE, donde al llamar al funcion GLOBAL, en realidad estoy llamando a la funcion LOCAL, ya que hice que retornara esta funcioN.
+
+//este es un CLUSURE basico, donde retornamos una f() dentro de otra
+        function otroContador(){
+            let numero = 0
+            // aca hago el CLOUSERE de las variables
+            return {
+                sumar : function(){
+                    numero=numero + 1
+                    return numero
+                },
+
+                restar : function(){
+                    numero=numero - 1
+                    return numero
+                },
+
+                mostrar : function(){
+                    numero=numero
+                    return numero
+                }
+            }
+        }
+
+        const otroContar = otroContador()
+        otroContar.sumar() // asi se ejecuaria la f() como si fuera una variable del objeto, llamando las 3 variables cuando se requieran
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GETTER Y SETTERS</title>
+</head>
+<p id = "mensaje"></p>
+<body>
+    <script>
+        class Telefono {
+            constructor (marca) {
+                this._marca = marca
+            }
+            get marca () { 
+                return this._marca
+            }
+            set marca (mar) {
+                this._marca = mar
+            }
+        }
+
+let telefonoUno = new Telefono ("Personal")
+telefonoUno.marca = "Siemens"
+mensaje.innerHTML = `Mi telefono es de marca ${telefonoUno.marca}`
+
+    </script>
+</body>
+</html>

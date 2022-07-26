@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>Prototype</title>
+  </head>
+
+  <body>
+    <p><em>Abre la consola</em></p>
+
+    <script>
+       // Un objeto común y corriente
+  const metroid = {
+  name: 'Samus',
+  };
+
+  metroid.saludar = function() {
+  console.log(`Hola soy ${this.name}`)};
+  metroid.saludar()
+
+      // Seamos un poco más eficientes
+  function Hero (name) {
+  const hero = {name: name}
+  hero.saludar = function () {console.log (`Its me, ${this.name}`)
+  }
+  return hero
+  }
+
+  const mario = Hero ("Mario")
+  const luigi = Hero ("Luigi")
+
+  mario.saludar()
+  luigi.saludar()
+
+
+      // Aun podemos mejorar más y evitar tener que crear la misma función cada vez
+  const heroReMethods = {
+    saludar : function () {console.log (`Me llamo, ${this.name}`)}
+  }
+
+  function HeroRE (name) {
+    {const hero = {name: name}
+  hero.saludar = heroReMethods.saludar
+  return hero
+  }      
+}
+
+  const jill = HeroRE ("Jill Valentine")
+  const carlos = HeroRE ("Carlos Oliveira")
+
+  jill.saludar ()
+  carlos.saludar ()
+
+      // Object.create, Los métodos de hero dentro de Hero
+
+  const heroShMethods = {
+    saludar : function () {console.log (`Hola, soy ${this.name}`)}
+  }
+
+  function HeroSH (name) {
+  const hero = Object.create(heroShMethods)
+  hero.name = name
+  return hero
+  }      
+
+
+  const harry = HeroSH ("Harry Mason")
+  const cybil = HeroSH ("Cybil Bennett")
+
+  harry.saludar ()
+  cybil.saludar ()
+
+      // new es un atajo (azucar sintactica) para llevar Hero.prototype al objeto que estamos creando
+
+  function HeroBL (name) {
+  this.name = name 
+  }     
+
+  HeroBL.prototype.saludar = function () {
+    console.log  (`New: ${this.name}`
+    )}
+ 
+  const lilith = new HeroBL ("Lilith")
+  const mordecai = new HeroBL ("Mordecai")
+
+  lilith.saludar ()
+  mordecai.saludar ()
+    </script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <title>Promesas</title>
+  </head>
+
+  <body>
+    <a href="/ejercicios/">Go back</a>
+
+    <ul>
+      <li><button id="sequence">Get Top Movies in Sequence</button></li>
+      <li><button id="parallel">Get Top Movies in Parallel</button></li>
+      <li><button id="fastest">Get Fastest Top Movie</button></li>
+    </ul>
+
+    <ul id="movies"></ul>
+
+    <script>
+      // Ejemplo: renderMovies([{ title: "Spider-Man", release_date: "2019-06-30", poster_path: "/rjbNpRMoVvqHmhmksbokcyCr7wn.jpg" }])
+      // Traducir las funciones de usar thens a usar async/await
+      // Crear función para que no nos gastemos la cantidad de requests demasiado rapido
+      // Crear función donde hacemos requests secuenciales
+      // Crear función donde hacemos requests en paralelo
+      // Crear función donde obtenemos el primer request que llegue
+
+      // The Movie Database API: https://developers.themoviedb.org/3/getting-started/introduction
+
+      const apiKey = 'b89fc45c2067cbd33560270639722eae'; // esta es la autenticacion para usar el servidor externi o una API
+
+      async function getMovie(id) {//nos da el detalle de todas las peliculas buscadas por su ID
+        const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
+        const response = await fetch(url);
+        const data = await response.json(); // convierte la busqueda que se hizo de la API de URL y RESPONSE en algo mas legible
+        return data; //retorna el valor encontrado
+      }
+
+      async function getPopularMovies() { 
+        const url = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.results; // RESULTS es un objeto por defecto de la busqueda de la API, la cual muestra toooooooooodas las peliculas ordenadas de las mas populares a las menos populares
+      }
+
+      async function getTopMoviesIds(n = 3) { 
+        // return getPopularMovies().then(popularMovies =>
+        //   popularMovies.slice(0, n).map(movie => movie.id)
+        // );
+         
+        const popularMovies = await getPopularMovies();
+        const ids = popularMovies.slice(0, n).map(movie => movie.id);
+        return ids;
+      }
+
+      function renderMovies(movies) {
+        const movieList = document.getElementById('movies');
+        movieList.innerHTML = '';
+        movies.forEach(movie => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w342${movie.poster_path}" />
+            <h5>${movie.title}</h5>
+            <p>Released on <em>${movie.release_date}</em></p>
+            `;
+
+          movieList.appendChild(listItem);
+        });
+      }
+
+      async function getTopMoviesInSequence() {
+        const ids = await getTopMoviesIds();
+        const movies = [];
+
+        for (const id of ids) {
+          const movie = await getMovie(id);
+          movies.push(movie);
+          console.log (movie)
+        }
+
+        return movies;
+      }
+
+      async function getTopMoviesInParallel() {
+        const ids = await getTopMoviesIds();
+        const moviePromises = ids.map(id => getMovie(id));
+
+        const movies = await Promise.all(moviePromises); // .ALL quiere decir que espera a que todas las promesas se resuelvan, alas que estan en moviePromises. si la promesa es rechazada da error de una !!! toca estar pilas, sin embargo podemos manejarlo con try y catch
+        return movies;
+      }
+
+      async function getFastestTopMovie() {
+        const ids = await getTopMoviesIds();
+        const moviePromises = ids.map(id => getMovie(id));
+
+        const movie = await Promise.race(moviePromises); //.RACE es un metodo de Promises la cual solo muestra la promesa que se ejecute primero
+        return movie;
+      }
+
+      document.getElementById('sequence').onclick = async function() {
+        const movies = await getTopMoviesInSequence();
+        renderMovies(movies);
+      };
+
+      document.getElementById('parallel').onclick = async function() {
+        const movies = await getTopMoviesInParallel();
+        renderMovies(movies);
+      };
+
+      document.getElementById('fastest').onclick = async function() {
+        const movie = await getFastestTopMovie();
+        renderMovies([movie]); //como solo queremos mostrar un ARRAY con solo un elemento, se pone entre [] 
+      };
+    </script>
+  </body>
+</html>

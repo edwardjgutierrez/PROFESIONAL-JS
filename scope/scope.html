@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> SCOPE </title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/scope/"> GO BACK </a>
+    <p> <em> Abre la consola </em></p>
+    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+    <script>
+        //GLOBAL SCOPE    ---     escoje la variable desde afuera y la pone adentro de la funcion
+        var mensage = "Que se ice"
+        function llamar () 
+        {   
+            console.log("ESTO ES EL SCOPE GLOBAL")
+            var menssage = "Ole"
+            console.log (mensage + " La Rata")
+        }
+        llamar()
+
+        // FUNCTION SCOPE    ---    solo toma el valor de "n" dentro de la funciona mas no de "i" directamente
+        function printNumbers () 
+        {
+        console.log("ESTO ES EL SCOPE DE FUNCION")
+        var i;
+            for (i = 0; i < 10;  i++)
+            {
+                function eventuallyPrintNumber(n)
+                {
+                 setTimeout 
+                 (
+                    function ()
+                    {
+                       console.log(n)
+                    }, 1000
+                 )
+                }
+            eventuallyPrintNumber(i)
+            }
+        }
+
+        printNumbers()        
+
+        // BLOCK SCOPE ------------- con el uso de LET ya no se va a convertir en una variable global de la funcin, sino que va a estar dentro de la ieracino siempre
+
+        function printNumberss () 
+        {
+        console.log("ESTO ES EL SCOPE DE BLOQUE")
+            for (let i = 0; i < 10;  i++)
+            {
+                setTimeout 
+                 (
+                    function ()
+                    {
+                       console.log(i)
+                    }, 1000
+                 )
+            }
+        }
+
+        printNumberss()        
+
+        // MODULE SCOPE
+
+//es la vida de una variable exportada desde otros archivos... se debe poner en HTML el type "module" en el SCR donde esta el JS para llamar archivos, adicionalemnte con EXPORT  e IMPORT
+
+
+
+
+    </script>
+</body>
+</html>

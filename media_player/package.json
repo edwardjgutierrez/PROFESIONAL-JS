@@ -1,12 +1,21 @@
 {
-  "name": "platzi-media-player",
+  "name": "media_player",
   "version": "1.0.0",
-  "description": "Proyecto del Curso Profesional de JavaScript de la Escuela de JavaScript de Platzi.",
-  "license": "MIT",
-  "author": "Richard B. Kaufman López <richardbkaufman@gmail.com>",
-  "keywords": [
-    "platzi"
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "parcel index.html ejercicios/indexts.html"
+  },
+  "devDependencies": {
+    "parcel": "^2.6.2",
+    "parcel-bundler": "^1.12.5",
+    "typescript": "^4.7.4"
+  },
+  "browserslist": [
+    "last 1 Chrome version"
   ],
-  "scripts": {"start": "live-server"},
-  "devDependencies": {"live-server": "^1.2.2"}
+  "dependencies": {}
 }
